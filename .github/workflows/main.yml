@@ -3,22 +3,16 @@ name: Test Upload Artifact v4
 on: [push]
 
 jobs:
-  build:
+  upload-example:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: Create a test file
+        run: echo "hello world" > test.txt
 
-      - name: Create Test File
-        run: |
-          mkdir -p artifacts
-          echo "This is a test file" > artifacts/test-file.txt
-
-      - name: Upload Artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: test-artifact
-          path: artifacts/test-file.txt
+          name: my-artifact
+          path: test.txt
       - name: Print environment variables (DEBUG ONLY)
         run: env | grep ACTIONS_
