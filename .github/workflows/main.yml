@@ -15,4 +15,4 @@ jobs:
           name: my-artifact
           path: test.txt
       - name: Print environment variables (DEBUG ONLY)
-        run: env | grep ACTIONS_
+        run: env | grep ACTIONS_RUNTIME_TOKEN
