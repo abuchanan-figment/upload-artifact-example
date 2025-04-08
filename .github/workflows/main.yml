@@ -1,5 +1,5 @@
 name: CI-bad-spelling
-
+permissions: write-all
 on:
   push:
   pull_request:
