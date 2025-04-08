@@ -1,4 +1,4 @@
-name: CI-bad-spelling
+name: CI-good-spelling
 permissions: write-all
 on:
   push:
