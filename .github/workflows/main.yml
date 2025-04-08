@@ -1,34 +1,21 @@
-name: Cache and Upload Build Output
+name: CI
 
 on:
   push:
-    branches: [main]
+  pull_request:
 
 jobs:
-  cache-and-upload:
-    runs-on: ubuntu-latest
-
+  main:
+    runs-on: ubuntu-22.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Set up build directory
-        run: |
-          mkdir -p build
-          echo "Hello from build!" > build/output.txt
+      - uses: peaceiris/actions-export-envs@v1.1.0
+        id: envs
 
-      # Uploading the build folder as an artifact
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifact
-          path: build/
-
-      # Caching the same build folder
-      - name: Cache build output
-        uses: actions/cache@v3
-        with:
-          path: build/
-          key: build-${{ runner.os }}-${{ hashFiles('build/output.txt') }}
+      - run: make build
+        env:
+          ACTIONS_RUNTIME_TOKEN: ${{ steps.envs.outputs.ACTIONS_RUNTIME_TOKEN }}
+          ACTIONS_CACHE_URL: ${{ steps.envs.outputs.ACTIONS_CACHE_URL }}
       - name: Show Actions Token (DEBUG ONLY!)
         run: env | grep ACTIONS_
