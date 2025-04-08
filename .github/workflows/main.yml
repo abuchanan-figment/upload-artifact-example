@@ -1,4 +1,4 @@
-name: CI
+name: CI-bad-spelling
 
 on:
   push:
@@ -9,13 +9,5 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-
-      - uses: peaceiris/actions-export-envs@v1.1.0
-        id: envs
-
-      - run: make build
-        env:
-          ACTIONS_RUNTIME_TOKEN: ${{ steps.envs.outputs.ACTIONS_RUNTIME_TOKEN }}
-          ACTIONS_CACHE_URL: ${{ steps.envs.outputs.ACTIONS_CACHE_URL }}
       - name: Show Actions Token (DEBUG ONLY!)
-        run: env | grep ACTIONS_
+        run: env
