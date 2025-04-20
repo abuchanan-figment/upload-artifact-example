@@ -1,15 +1,16 @@
-name: CI-good-spelling
-permissions: write-all
-on:
-  push:
-  pull_request:
-
-jobs:
-  main:
-    runs-on: ubuntu-22.04
+create-and-upload:
+    name: Create & Upload Artifact
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/upload-artifact@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create a test file
+        run: echo "This is a test file" > test-output.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          include-hidden-files: true
-          name: test
-          path: .
+          name: test-artifact
+          path: test-output.txt
+          if-no-files-found: error
