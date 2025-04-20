@@ -8,6 +8,6 @@ jobs:
   main:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-      - name: Show Actions Token (DEBUG ONLY!)
+      - uses: actions/upload-artifact@v4
+      - name: test
         run: env
