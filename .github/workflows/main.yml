@@ -1,4 +1,9 @@
-create-and-upload:
+name: Test Artifact Upload
+
+on: [push, workflow_dispatch]
+
+jobs:
+  create-and-upload:
     name: Create & Upload Artifact
     runs-on: ubuntu-latest
     steps:
