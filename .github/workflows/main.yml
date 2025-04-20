@@ -1,21 +1,18 @@
-name: Test Artifact Upload
+name: Upload Artifact with .git Folder
 
-on: [push, workflow_dispatch]
+on: [workflow_dispatch]
 
 jobs:
-  create-and-upload:
-    name: Create & Upload Artifact
+  upload-with-git:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Clone the repository with .git folder
+        run: |
+          git clone https://github.com/${{ github.repository }} repo-full
+          ls -a repo-full  # Confirm .git folder is present
 
-      - name: Create a test file
-        run: echo "This is a test file" > test-output.txt
-
-      - name: Upload artifact
+      - name: Upload full repo with .git
         uses: actions/upload-artifact@v4
         with:
-          name: test-artifact
-          path: test-output.txt
-          if-no-files-found: error
+          name: full-repo-with-git
+          path: repo-full/
