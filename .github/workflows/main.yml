@@ -9,5 +9,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/upload-artifact@v4
-      - name: test
-        run: env
+        with:
+          include-hidden-files: true
+          name: test
+          path: .
